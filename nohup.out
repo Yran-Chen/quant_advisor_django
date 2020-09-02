@@ -1,0 +1,296 @@
+Watching for file changes with StatReloader
+[20/Apr/2020 02:49:54] "GET /form/?returns1=&returns2=&returns_andor=or&returns_rule1=&returns_rule2=&sharpe1=&sharpe2=&sharpe_andor=or&sharpe_rule1=&sharpe_rule2=&max_drawdown1=0.15&max_drawdown2=&max_drawdown_andor=or&max_drawdown_rule1=lt&max_drawdown_rule2=&std1=&std2=&std_andor=or&std_rule1=&std_rule2=&ir1=&ir2=&ir_andor=or&ir_rule1=&ir_rule2=&callback=success_jsonp HTTP/1.1" 200 343043
+/home/ultra/cyr/django/robo_advisor/robo_advisor/portfo_optimize/portfo_optimization.py:47: FutureWarning: Sorting because non-concatenation axis is not aligned. A future version
+of pandas will change to not sort by default.
+
+To accept the future behavior, pass 'sort=False'.
+
+To retain the current behavior and silence the warning, pass 'sort=True'.
+
+  weight = pd.concat([weight,self.weight.iloc[:-1,]])
+[20/Apr/2020 02:50:00] "GET /opt/?returns1=&returns2=&returns_andor=or&returns_rule1=&returns_rule2=&sharpe1=&sharpe2=&sharpe_andor=or&sharpe_rule1=&sharpe_rule2=&max_drawdown1=0.15&max_drawdown2=&max_drawdown_andor=or&max_drawdown_rule1=lt&max_drawdown_rule2=&std1=&std2=&std_andor=or&std_rule1=&std_rule2=&ir1=&ir2=&ir_andor=or&ir_rule1=&ir_rule2=&callback=success_jsonp&start_date=&end_date=&selected=oi-4%24op_10%2Coi-3%24op_5%2Coi-3%24op_2%2C&fee=&threshold= HTTP/1.1" 200 210909
+[20/Apr/2020 02:50:07] "GET /form/?returns1=&returns2=&returns_andor=or&returns_rule1=&returns_rule2=&sharpe1=&sharpe2=&sharpe_andor=or&sharpe_rule1=&sharpe_rule2=&max_drawdown1=0.15&max_drawdown2=&max_drawdown_andor=or&max_drawdown_rule1=lt&max_drawdown_rule2=&std1=&std2=&std_andor=or&std_rule1=&std_rule2=&ir1=&ir2=&ir_andor=or&ir_rule1=&ir_rule2=&callback=success_jsonp HTTP/1.1" 200 343043
+[20/Apr/2020 02:50:13] "GET /opt/?returns1=&returns2=&returns_andor=or&returns_rule1=&returns_rule2=&sharpe1=&sharpe2=&sharpe_andor=or&sharpe_rule1=&sharpe_rule2=&max_drawdown1=0.15&max_drawdown2=&max_drawdown_andor=or&max_drawdown_rule1=lt&max_drawdown_rule2=&std1=&std2=&std_andor=or&std_rule1=&std_rule2=&ir1=&ir2=&ir_andor=or&ir_rule1=&ir_rule2=&callback=success_jsonp&start_date=&end_date=&selected=oi-4%24op_10%2Coi-4%24op_3%2Coi-3%24op_0%2C&fee=&threshold= HTTP/1.1" 200 211397
+Performing system checks...
+
+Factor Database init...
+System check identified no issues (0 silenced).
+April 20, 2020 - 02:49:27
+Django version 2.2.9, using settings 'robo_advisor.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Filter: max_drawdown < 0.15
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+dict_keys(['in-0$op_4', 'mom-5$op_8', 'oi-4$op_3', 'oi-4$op_10', 'oi-3$op_0', 'in-1$op_5', 'oi-0$op_5', 'mom-2$op_9', 'in-0$op_3', 'hp-0$op_0', 'oi-0$op_3', 'mom-0$op_7', 'in-3$op_0', 'ts-0$op_11', 'in-2$op_2', 'mom-5$op_9', 'ts-0$op_12', 'oi-3$op_5', 'ts-0$op_13', 'in-2$op_3', 'ts-0$op_14', 'in-1$op_3', 'hp-1$op_2', 'mom-4$op_8', 'in-1$op_1', 'oi-1$op_5', 'hp-0$op_1', 'mom-1$op_7', 'in-2$op_5', 'mom-4$op_9', 'mom-1$op_6', 'oi-2$op_5', 'hp-2$op_2', 'ts-0$op_15', 'ts-0$op_16', 'in-3$op_5', 'mom-2$op_8', 'oi-3$op_2', 'in-1$op_0', 'mom-3$op_6', 'in-1$op_2', 'mom-3$op_7', 'mom-0$op_6'])
+Int64Index([0], dtype='int64')
+Int64Index([1], dtype='int64')
+Int64Index([2], dtype='int64')
+Int64Index([3], dtype='int64')
+Int64Index([4], dtype='int64')
+Int64Index([5], dtype='int64')
+Int64Index([6], dtype='int64')
+New key:
+ Empty DataFrame
+Columns: [alpha_id, op_id]
+Index: []
+Existed key:
+   alpha_id  op_id
+0     oi-3   op_0
+1     oi-3   op_2
+2     oi-0   op_3
+3     oi-4   op_3
+4     oi-0   op_5
+5     oi-3   op_5
+6     oi-4  op_10
+Start calculating... 
+Total time usage  4.100799560546875e-05
+Empty DataFrame
+Columns: []
+Index: []
+parse end.(DEBUG ver.)
+callback  success_jsonp
+Filter: max_drawdown < 0.15
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+dict_keys(['in-0$op_4', 'mom-5$op_8', 'oi-4$op_3', 'oi-4$op_10', 'oi-3$op_0', 'in-1$op_5', 'oi-0$op_5', 'mom-2$op_9', 'in-0$op_3', 'hp-0$op_0', 'oi-0$op_3', 'mom-0$op_7', 'in-3$op_0', 'ts-0$op_11', 'in-2$op_2', 'mom-5$op_9', 'ts-0$op_12', 'oi-3$op_5', 'ts-0$op_13', 'in-2$op_3', 'ts-0$op_14', 'in-1$op_3', 'hp-1$op_2', 'mom-4$op_8', 'in-1$op_1', 'oi-1$op_5', 'hp-0$op_1', 'mom-1$op_7', 'in-2$op_5', 'mom-4$op_9', 'mom-1$op_6', 'oi-2$op_5', 'hp-2$op_2', 'ts-0$op_15', 'ts-0$op_16', 'in-3$op_5', 'mom-2$op_8', 'oi-3$op_2', 'in-1$op_0', 'mom-3$op_6', 'in-1$op_2', 'mom-3$op_7', 'mom-0$op_6'])
+Int64Index([0], dtype='int64')
+Int64Index([1], dtype='int64')
+Int64Index([2], dtype='int64')
+Int64Index([3], dtype='int64')
+Int64Index([4], dtype='int64')
+Int64Index([5], dtype='int64')
+Int64Index([6], dtype='int64')
+New key:
+ Empty DataFrame
+Columns: [alpha_id, op_id]
+Index: []
+Existed key:
+   alpha_id  op_id
+0     oi-3   op_0
+1     oi-3   op_2
+2     oi-0   op_3
+3     oi-4   op_3
+4     oi-0   op_5
+5     oi-3   op_5
+6     oi-4  op_10
+Start calculating... 
+Total time usage  3.62396240234375e-05
+Empty DataFrame
+Columns: []
+Index: []
+['oi-4$op_10', 'oi-3$op_5', 'oi-3$op_2']
+optimization end.
+callback  success_jsonp
+Filter: max_drawdown < 0.15
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+dict_keys(['in-0$op_4', 'mom-5$op_8', 'oi-4$op_3', 'oi-4$op_10', 'oi-3$op_0', 'in-1$op_5', 'oi-0$op_5', 'mom-2$op_9', 'in-0$op_3', 'hp-0$op_0', 'oi-0$op_3', 'mom-0$op_7', 'in-3$op_0', 'ts-0$op_11', 'in-2$op_2', 'mom-5$op_9', 'ts-0$op_12', 'oi-3$op_5', 'ts-0$op_13', 'in-2$op_3', 'ts-0$op_14', 'in-1$op_3', 'hp-1$op_2', 'mom-4$op_8', 'in-1$op_1', 'oi-1$op_5', 'hp-0$op_1', 'mom-1$op_7', 'in-2$op_5', 'mom-4$op_9', 'mom-1$op_6', 'oi-2$op_5', 'hp-2$op_2', 'ts-0$op_15', 'ts-0$op_16', 'in-3$op_5', 'mom-2$op_8', 'oi-3$op_2', 'in-1$op_0', 'mom-3$op_6', 'in-1$op_2', 'mom-3$op_7', 'mom-0$op_6'])
+Int64Index([0], dtype='int64')
+Int64Index([1], dtype='int64')
+Int64Index([2], dtype='int64')
+Int64Index([3], dtype='int64')
+Int64Index([4], dtype='int64')
+Int64Index([5], dtype='int64')
+Int64Index([6], dtype='int64')
+New key:
+ Empty DataFrame
+Columns: [alpha_id, op_id]
+Index: []
+Existed key:
+   alpha_id  op_id
+0     oi-3   op_0
+1     oi-3   op_2
+2     oi-0   op_3
+3     oi-4   op_3
+4     oi-0   op_5
+5     oi-3   op_5
+6     oi-4  op_10
+Start calculating... 
+Total time usage  3.933906555175781e-05
+Empty DataFrame
+Columns: []
+Index: []
+parse end.(DEBUG ver.)
+callback  success_jsonp
+Filter: max_drawdown < 0.15
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+['oi-3$op_0', 'oi-3$op_2', 'oi-0$op_3', 'oi-4$op_3', 'oi-0$op_5', 'oi-3$op_5', 'oi-4$op_10']
+dict_keys(['in-0$op_4', 'mom-5$op_8', 'oi-4$op_3', 'oi-4$op_10', 'oi-3$op_0', 'in-1$op_5', 'oi-0$op_5', 'mom-2$op_9', 'in-0$op_3', 'hp-0$op_0', 'oi-0$op_3', 'mom-0$op_7', 'in-3$op_0', 'ts-0$op_11', 'in-2$op_2', 'mom-5$op_9', 'ts-0$op_12', 'oi-3$op_5', 'ts-0$op_13', 'in-2$op_3', 'ts-0$op_14', 'in-1$op_3', 'hp-1$op_2', 'mom-4$op_8', 'in-1$op_1', 'oi-1$op_5', 'hp-0$op_1', 'mom-1$op_7', 'in-2$op_5', 'mom-4$op_9', 'mom-1$op_6', 'oi-2$op_5', 'hp-2$op_2', 'ts-0$op_15', 'ts-0$op_16', 'in-3$op_5', 'mom-2$op_8', 'oi-3$op_2', 'in-1$op_0', 'mom-3$op_6', 'in-1$op_2', 'mom-3$op_7', 'mom-0$op_6'])
+Int64Index([0], dtype='int64')
+Int64Index([1], dtype='int64')
+Int64Index([2], dtype='int64')
+Int64Index([3], dtype='int64')
+Int64Index([4], dtype='int64')
+Int64Index([5], dtype='int64')
+Int64Index([6], dtype='int64')
+New key:
+ Empty DataFrame
+Columns: [alpha_id, op_id]
+Index: []
+Existed key:
+   alpha_id  op_id
+0     oi-3   op_0
+1     oi-3   op_2
+2     oi-0   op_3
+3     oi-4   op_3
+4     oi-0   op_5
+5     oi-3   op_5
+6     oi-4  op_10
+Start calculating... 
+Total time usage  4.506111145019531e-05
+Empty DataFrame
+Columns: []
+Index: []
+['oi-4$op_10', 'oi-4$op_3', 'oi-3$op_0']
+optimization end.
+callback  success_jsonp
+Filter: max_drawdown < 0.25
+['in-1$op_0', 'oi-3$op_0', 'hp-0$op_1', 'in-1$op_1', 'hp-1$op_2', 'in-1$op_2', 'oi-3$op_2', 'in-1$op_3', 'oi-0$op_3', 'oi-4$op_3', 'in-0$op_4', 'oi-0$op_5', 'oi-1$op_5', 'oi-2$op_5', 'oi-3$op_5', 'mom-0$op_7', 'mom-1$op_7', 'mom-3$op_7', 'oi-4$op_10', 'ts-0$op_11', 'ts-0$op_12', 'ts-0$op_13', 'ts-0$op_14', 'ts-0$op_15', 'ts-0$op_16']
+['in-1$op_0', 'oi-3$op_0', 'hp-0$op_1', 'in-1$op_1', 'hp-1$op_2', 'in-1$op_2', 'oi-3$op_2', 'in-1$op_3', 'oi-0$op_3', 'oi-4$op_3', 'in-0$op_4', 'oi-0$op_5', 'oi-1$op_5', 'oi-2$op_5', 'oi-3$op_5', 'mom-0$op_7', 'mom-1$op_7', 'mom-3$op_7', 'oi-4$op_10', 'ts-0$op_11', 'ts-0$op_12', 'ts-0$op_13', 'ts-0$op_14', 'ts-0$op_15', 'ts-0$op_16']
+dict_keys(['in-0$op_4', 'mom-5$op_8', 'oi-4$op_3', 'oi-4$op_10', 'oi-3$op_0', 'in-1$op_5', 'oi-0$op_5', 'mom-2$op_9', 'in-0$op_3', 'hp-0$op_0', 'oi-0$op_3', 'mom-0$op_7', 'in-3$op_0', 'ts-0$op_11', 'in-2$op_2', 'mom-5$op_9', 'ts-0$op_12', 'oi-3$op_5', 'ts-0$op_13', 'in-2$op_3', 'ts-0$op_14', 'in-1$op_3', 'hp-1$op_2', 'mom-4$op_8', 'in-1$op_1', 'oi-1$op_5', 'hp-0$op_1', 'mom-1$op_7', 'in-2$op_5', 'mom-4$op_9', 'mom-1$op_6', 'oi-2$op_5', 'hp-2$op_2', 'ts-0$op_15', 'ts-0$op_16', 'in-3$op_5', 'mom-2$op_8', 'oi-3$op_2', 'in-1$op_0', 'mom-3$op_6', 'in-1$op_2', 'mom-3$op_7', 'mom-0$op_6'])
+Int64Index([0], dtype='int64')
+Int64Index([1], dtype='int64')
+Int64Index([2], dtype='int64')
+Int64Index([3], dtype='int64')
+Int64Index([4], dtype='int64')
+Int64Index([5], dtype='int64')
+Int64Index([6], dtype='int64')
+Int64Index([7], dtype='int64')
+Int64Index([8], dtype='int64')
+Int64Index([9], dtype='int64')
+Int64Index([10], dtype='int64')
+Int64Index([11], dtype='int64')
+Int64Index([12], dtype='int64')
+Int64Index([13], dtype='int64')
+Int64Index([14], dtype='int64')
+Int64Index([15], dtype='int64')
+Int64Index([16], dtype='int64')
+Int64Index([17], dtype='int64')
+Int64Index([18], dtype='int64')
+Int64Index([19], dtype='int64')
+Int64Index([20], dtype='int64')
+Int64Index([21], dtype='int64')
+Int64Index([22], dtype='int64')
+Int64Index([23], dtype='int64')
+Int64Index([24], dtype='int64')
+New key:
+ Empty DataFrame
+Columns: [alpha_id, op_id]
+Index: []
+Existed key:
+    alpha_id  op_id
+0      in-1   op_0
+1      oi-3   op_0
+2      hp-0   op_1
+3      in-1   op_1
+4      hp-1   op_2
+5      in-1   op_2
+6      oi-3   op_2
+7      in-1   op_3
+8      oi-0   op_3
+9      oi-4   op_3
+10     in-0   op_4
+11     oi-0   op_5
+12     oi-1   op_5
+13     oi-2   op_5
+14     oi-3   op_5
+15    mom-0   op_7
+16    mom-1   op_7
+17    mom-3   op_7
+18     oi-4  op_10
+19     ts-0  op_11
+20     ts-0  op_12
+21     ts-0  op_13
+22     ts-0  op_14
+23     ts-0  op_15
+24     ts-0  op_16[20/Apr/2020 02:50:22] "GET /form/?returns1=&returns2=&returns_andor=or&returns_rule1=&returns_rule2=&sharpe1=&sharpe2=&sharpe_andor=or&sharpe_rule1=&sharpe_rule2=&max_drawdown1=0.25&max_drawdown2=&max_drawdown_andor=or&max_drawdown_rule1=lt&max_drawdown_rule2=&std1=&std2=&std_andor=or&std_rule1=&std_rule2=&ir1=&ir2=&ir_andor=or&ir_rule1=&ir_rule2=&callback=success_jsonp HTTP/1.1" 200 1107534
+[20/Apr/2020 02:50:29] "GET /opt/?returns1=&returns2=&returns_andor=or&returns_rule1=&returns_rule2=&sharpe1=&sharpe2=&sharpe_andor=or&sharpe_rule1=&sharpe_rule2=&max_drawdown1=0.25&max_drawdown2=&max_drawdown_andor=or&max_drawdown_rule1=lt&max_drawdown_rule2=&std1=&std2=&std_andor=or&std_rule1=&std_rule2=&ir1=&ir2=&ir_andor=or&ir_rule1=&ir_rule2=&callback=success_jsonp&start_date=&end_date=&selected=oi-3%24op_5%2Cin-0%24op_4%2Cin-1%24op_1%2Cin-1%24op_0%2Coi-0%24op_3%2C&fee=&threshold= HTTP/1.1" 200 279451
+/home/ultra/cyr/django/robo_advisor/robo_advisor/fastback/views.py changed, reloading.
+
+Start calculating... 
+Total time usage  3.62396240234375e-05
+Empty DataFrame
+Columns: []
+Index: []
+parse end.(DEBUG ver.)
+callback  success_jsonp
+Filter: max_drawdown < 0.25
+['in-1$op_0', 'oi-3$op_0', 'hp-0$op_1', 'in-1$op_1', 'hp-1$op_2', 'in-1$op_2', 'oi-3$op_2', 'in-1$op_3', 'oi-0$op_3', 'oi-4$op_3', 'in-0$op_4', 'oi-0$op_5', 'oi-1$op_5', 'oi-2$op_5', 'oi-3$op_5', 'mom-0$op_7', 'mom-1$op_7', 'mom-3$op_7', 'oi-4$op_10', 'ts-0$op_11', 'ts-0$op_12', 'ts-0$op_13', 'ts-0$op_14', 'ts-0$op_15', 'ts-0$op_16']
+['in-1$op_0', 'oi-3$op_0', 'hp-0$op_1', 'in-1$op_1', 'hp-1$op_2', 'in-1$op_2', 'oi-3$op_2', 'in-1$op_3', 'oi-0$op_3', 'oi-4$op_3', 'in-0$op_4', 'oi-0$op_5', 'oi-1$op_5', 'oi-2$op_5', 'oi-3$op_5', 'mom-0$op_7', 'mom-1$op_7', 'mom-3$op_7', 'oi-4$op_10', 'ts-0$op_11', 'ts-0$op_12', 'ts-0$op_13', 'ts-0$op_14', 'ts-0$op_15', 'ts-0$op_16']
+dict_keys(['in-0$op_4', 'mom-5$op_8', 'oi-4$op_3', 'oi-4$op_10', 'oi-3$op_0', 'in-1$op_5', 'oi-0$op_5', 'mom-2$op_9', 'in-0$op_3', 'hp-0$op_0', 'oi-0$op_3', 'mom-0$op_7', 'in-3$op_0', 'ts-0$op_11', 'in-2$op_2', 'mom-5$op_9', 'ts-0$op_12', 'oi-3$op_5', 'ts-0$op_13', 'in-2$op_3', 'ts-0$op_14', 'in-1$op_3', 'hp-1$op_2', 'mom-4$op_8', 'in-1$op_1', 'oi-1$op_5', 'hp-0$op_1', 'mom-1$op_7', 'in-2$op_5', 'mom-4$op_9', 'mom-1$op_6', 'oi-2$op_5', 'hp-2$op_2', 'ts-0$op_15', 'ts-0$op_16', 'in-3$op_5', 'mom-2$op_8', 'oi-3$op_2', 'in-1$op_0', 'mom-3$op_6', 'in-1$op_2', 'mom-3$op_7', 'mom-0$op_6'])
+Int64Index([0], dtype='int64')
+Int64Index([1], dtype='int64')
+Int64Index([2], dtype='int64')
+Int64Index([3], dtype='int64')
+Int64Index([4], dtype='int64')
+Int64Index([5], dtype='int64')
+Int64Index([6], dtype='int64')
+Int64Index([7], dtype='int64')
+Int64Index([8], dtype='int64')
+Int64Index([9], dtype='int64')
+Int64Index([10], dtype='int64')
+Int64Index([11], dtype='int64')
+Int64Index([12], dtype='int64')
+Int64Index([13], dtype='int64')
+Int64Index([14], dtype='int64')
+Int64Index([15], dtype='int64')
+Int64Index([16], dtype='int64')
+Int64Index([17], dtype='int64')
+Int64Index([18], dtype='int64')
+Int64Index([19], dtype='int64')
+Int64Index([20], dtype='int64')
+Int64Index([21], dtype='int64')
+Int64Index([22], dtype='int64')
+Int64Index([23], dtype='int64')
+Int64Index([24], dtype='int64')
+New key:
+ Empty DataFrame
+Columns: [alpha_id, op_id]
+Index: []
+Existed key:
+    alpha_id  op_id
+0      in-1   op_0
+1      oi-3   op_0
+2      hp-0   op_1
+3      in-1   op_1
+4      hp-1   op_2
+5      in-1   op_2
+6      oi-3   op_2
+7      in-1   op_3
+8      oi-0   op_3
+9      oi-4   op_3
+10     in-0   op_4
+11     oi-0   op_5
+12     oi-1   op_5
+13     oi-2   op_5
+14     oi-3   op_5
+15    mom-0   op_7
+16    mom-1   op_7
+17    mom-3   op_7
+18     oi-4  op_10
+19     ts-0  op_11
+20     ts-0  op_12
+21     ts-0  op_13
+22     ts-0  op_14
+23     ts-0  op_15
+24     ts-0  op_16
+Start calculating... 
+Total time usage  3.933906555175781e-05
+Empty DataFrame
+Columns: []
+Index: []
+['oi-3$op_5', 'in-0$op_4', 'in-1$op_1', 'in-1$op_0', 'oi-0$op_3']
+optimization end.
+callback  success_jsonp
+Watching for file changes with StatReloader
+/home/ultra/cyr/django/robo_advisor/robo_advisor/fastback/views.py changed, reloading.
+Performing system checks...
+
+Factor Database init...
+System check identified no issues (0 silenced).
+April 20, 2020 - 02:50:51
+Django version 2.2.9, using settings 'robo_advisor.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
