@@ -68,8 +68,3 @@ if __name__ == "__main__":
 
     total = s.strategy_combine()
     print(total)
-    # df = df.resample("Y").sum()
-    # total.index = df.index
-    # df = df.join(total)
-    # print(df)
-    # df.plot()

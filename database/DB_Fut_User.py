@@ -153,7 +153,7 @@ class FutUserDatabase(Database):
             cursor.close()
 
     def get_list(self, uid, table_name='fut_automation'):
-        """查数据库列表"""
+        """Get List For Database."""
 
         sql = "select pid, name from {} where uid='{}'".format(table_name, uid)
         cursor = self.db.cursor()
@@ -179,12 +179,11 @@ class FutUserDatabase(Database):
 
 
     def get_list_value(self,uid,name,table_name = 'fut_automation'):
-        """查数据库进行展示"""
+        """Search for Database"""
 
         sql = "select * from {} " \
               "where uid = '{}' and name='{}'".format(table_name,uid,name)
         cursor = self.db.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        print(sql)
         try:
             cursor.execute(sql)
             result = cursor.fetchall()    # 返回的是value
@@ -209,10 +208,10 @@ class FutUserDatabase(Database):
         cursor.close()
 
     def save_value(self, dict):
-        """更新保存"""
+        """Save the update."""
 
         # self.delete_list_value(str(dict['pid']) ,dict['name'])
-        print('保存数据。。。')
+        # print('保存数据。。。')
         end_date = dict['end_date']
         # print(type(end_date))
         name = dict['name']
@@ -259,24 +258,6 @@ class FutUserDatabase(Database):
             )
             cursor.close()
 
-    # def get_pid_value(self, uid, pid, name=None, table_name = 'fut_automation'):
-    #     if name:
-    #         sql = "select * from {} where uid = {} and name = {} and pid = {}".format(table_name, uid, name, pid)
-    #
-    #     cursor = self.db.cursor()
-    #     try:
-    #         # print(sql)
-    #         cursor.execute(sql)
-    #         result = cursor.fetchall()
-    #         columns = self.get_columns_name(table_name)
-    #         df = pd.DataFrame.from_dict(result)
-    #         return df
-    #     except:
-    #         print(
-    #             "Failed to get pid from table {}".format(table_name)
-    #         )
-    #         cursor.close()
-
 if __name__ == "__main__":
 
     db_name = 'ultralpha_db'
@@ -292,9 +273,3 @@ if __name__ == "__main__":
 
     df_master = fb.get_user_df(uid='master')
     print(df_master)
-    # for i in df_master.index:
-    #     print(df_master.loc[i].to_dict())
-
-    # df = pd.read_csv("D:\!Ultralpha\!MyQuant\save\\fut_user_test.csv")
-    # print(df)
-    # fb.add_data(table_name='fut_automation',df=df,if_new_col=False)

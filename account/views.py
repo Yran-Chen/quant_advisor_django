@@ -9,7 +9,7 @@ import json
 
 
 def register(request):
-	"""注册"""
+	"""Register"""
 
 	username = request.POST.get('username')
 	pwd = request.POST.get('password')
@@ -17,19 +17,19 @@ def register(request):
 
 	users = User.objects.filter(username=username)
 	if users:
-		return JsonResponse({'status':'1', 'message':'用户名已经存在'})
+		return JsonResponse({'status':'1', 'message':'User already existed.'})
 	users = User.objects.filter(email=email)
 	if users:
-		return JsonResponse({'status':'2', 'message':'邮箱已经被注册'})
+		return JsonResponse({'status':'2', 'message':'Mail has been taken.'})
 
 	user = User.objects.create_user(username=username, password=pwd, email=email)
 	user.save()
 	if user:
-		return JsonResponse({'status':'0','message':'注册成功'})
+		return JsonResponse({'status':'0','message':'Register success.'})
 
 
 def login(request):
-	"""登录"""
+	"""Login"""
 
 	username = request.POST.get('username')
 	password = request.POST.get('password')
@@ -57,11 +57,11 @@ def login(request):
 		#print(request.session[session_id])
 		return response
 	else:
-		return JsonResponse({'status':'1','message':'账号或者密码错误'})
+		return JsonResponse({'status':'1','message':'Username or password Error.'})
 
 
 def logout(request):
-	"""退出登录"""
+	"""Logout"""
 	# 删除所有当前请求相关的session
 
 	auth.logout(request)
@@ -81,4 +81,4 @@ def check(request):
 	print(request.COOKIES.get('session_id'))
 	session_id = request.session.session_key
 	print(session_id)
-	return JsonResponse({'status':'2','message':'注册失败'})
+	return JsonResponse({'status':'2','message':'Register Failed.'})

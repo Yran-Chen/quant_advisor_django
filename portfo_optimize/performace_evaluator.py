@@ -102,15 +102,11 @@ class Performace_evaluator:
         pass
 
     def Mean_absolute_deviation(self, lamda=0.1):
-        #Minimize the mean-absolute-deviation
         self.ss = self.ss.apply(np.abs)
         x = self.ss.sum()
         x = (x.values @ self.weights) / len(x)
-
         r_average = self.weights @ self.average_ret.values
-
         utility = lamda * x - r_average * (1-lamda)
-
         return utility, self.weights, self.strategy
 
     def Variace_with_skewness(self):
@@ -135,11 +131,8 @@ class Performace_evaluator:
                     max_down = (high-ret[i])/high
                     start_date = x_date
                     end_date = date[i]
-#            print("The maximum draw down is between {} and {}, the value is {}".format(start_date,end_date,max_down))
             return max_down[0]
         if (np.array(self.raw_ret)==0.0).all() or len(self.raw_ret) == 1:
-            # print('xxxxxxxxxxxxx')
-            # print(self.raw_ret)
             return 0, self.weights, self.strategy
         else:
             s = self.raw_ret.apply(lambda x:np.average(x,weights=self.weights),1)
@@ -153,14 +146,11 @@ class Performace_evaluator:
                 calmar_ratio = ret / max_down
             else:
                 calmar_ratio = 0.0
-            # print(calmar_ratio)
-            # print('@@@@@@@@@@@@@@@@')
             return -calmar_ratio, self.weights, self.strategy
 
 if __name__ == "__main__":
-#    print("None")
     df = pd.read_csv("stock_price.csv",index_col="date")
-#    print(df)
+
     df = df.dropna()
     df = df.diff(1) / df.shift(1)
     df = df.dropna()

@@ -84,9 +84,3 @@ def cal_n_month_before( year, month, n):
         month = 1
         year += 1
     return year, month
-
-#year, month = 2019, 4
-#n = 2
-#print(cal_n_month_before(year, month, n))
-#date = datetime.date(2012, 3, 30)
-#print(get_next_month_end(date))

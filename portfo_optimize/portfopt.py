@@ -19,19 +19,6 @@ from dateutil.parser import parse
 class Portfopt():
     def __init__(self,returns):
         flag = 0
-#         for test_name_i,backtest_result_i in returns.items():
-#             for method_name_i,return_i in backtest_result_i.items():
-# #                print(test_name_i)
-# #                print(method_name_i)
-# #                print(return_i)
-#                 return_i = return_i.resample("M").sum()
-#                 if flag==0:
-#                     total_ret = pd.DataFrame(return_i.values,index=return_i.index,columns=[method_name_i])
-#                     flag = 1
-#                 elif flag==1:
-#                     return_i = pd.DataFrame(return_i.values,index=return_i.index,columns=[method_name_i])
-#                     total_ret = total_ret.join(return_i,how="outer")
-
         self.returns = returns
         self.begin_year = self.returns.index[0].strftime("%Y-%m-%d")[:4]
         self.end_year = self.returns.index[-1].strftime("%Y-%m-%d")[:4]
@@ -90,12 +77,10 @@ if __name__ == "__main__":
     df = pd.read_csv("stock_price.csv",index_col="date")
     print(df)
     df.index = [parse(i) for i in df.index]
-    # print(ret)
     df = df.dropna()
     df = df.diff(1) / df.shift(1)
     df = df.dropna()
     print(df)
-
 
     s = Portfopt(df)
     weight = s.maximum_sharpe()

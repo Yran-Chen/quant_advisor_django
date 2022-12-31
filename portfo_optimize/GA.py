@@ -29,7 +29,7 @@ class GeneticAlgorithm:
         '''
         Args:
            genetic_params (List[int])
-                A list of parameters that will be used to construct GA 
+                A list of parameters that will be used to construct GA
 
            evaluate_params (List[int])
                 List of parameters to evaluate the performance of the weights
@@ -41,7 +41,7 @@ class GeneticAlgorithm:
         self.strategy_pool = strategy_ret.columns
         self.ga_cycles = ga_cycles
 
-        
+
 #       evaluate function has not been defined
 #        self.evaluator = Performace_evaluator()
         self.Genetics = Genetics(population_size, len(self.strategy_pool), self.__class__)
@@ -53,7 +53,7 @@ class GeneticAlgorithm:
                 self.Genetics.get_population()
             fit_box = []
             for i in range(len(self.Genetics.genes)):
-                #                
+                #
                 #
                 #最后这个输入要换成  1.策略收益的dataframe  2.该表现型预设置的权重
                 #
@@ -130,7 +130,7 @@ class GeneticAlgorithm:
         '''
         if portfoliotype is None:
             portfoliotype = 'test'
-        
+
         #best is a chromosome class
         best = self.Genetics.best_gene()
         return  best.chromosome ,(best.chromosome / best.chromosome.sum())
@@ -178,8 +178,8 @@ class Genetics:
             self.genes[i].replace=True
             self.unfittest_genes.append(self.genes[i])
 
-# find the minimun of fitness its self.genes, in this program, 
-# the smaller the fitness, the better the gene is.            
+# find the minimun of fitness its self.genes, in this program,
+# the smaller the fitness, the better the gene is.
         ftns_thres = np.inf
         for i in range(len(self.genes)):
             if self.genes[i].fitness < ftns_thres:
@@ -187,11 +187,11 @@ class Genetics:
                 self.fittest_index = i
         self.fittest_gene = self.fittest_index
 
-        self.genes[self.fittest_index].replace = False 
+        self.genes[self.fittest_index].replace = False
         self.fittest_genes.append(self.genes[self.fittest_index])
         self.unfittest_genes.remove(self.genes[self.fittest_index])
 
-#iterate several times for selecting top (1 - replacement_rate) percent genes to keep. 
+#iterate several times for selecting top (1 - replacement_rate) percent genes to keep.
         for i in range(int((1 - self.ga_type.replacement_rate)*self.population_size)):
             ftns_thres = np.inf
             best = 0
@@ -227,7 +227,7 @@ class Genetics:
                         if j < split:
                             sibling.chromosome[j] = father.chromosome[j]
                             sibling.chromosome[j] = mother.chromosome[j]
-                            
+
 
 
 if __name__ == "__main__":
@@ -241,25 +241,3 @@ if __name__ == "__main__":
     x = GeneticAlgorithm(df,ga_cycles = 5)
     x.run_softmax()
     print(x.best_portfolio("None"))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

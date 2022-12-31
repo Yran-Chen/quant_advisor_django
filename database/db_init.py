@@ -9,7 +9,6 @@ user = 'cyr'
 password = 'ultralpha2020_frozenduck'
 port = '5432'
 
-
 data_proxy = FactorDatabase(db_name=db_name, host_name=host_name, user_name=user, pwd=password,port=port)
 user_proxy = FutUserDatabase(db_name=db_name, host_name=host_name, user_name=user, pwd=password,port=port)
 if not DEBUG_:

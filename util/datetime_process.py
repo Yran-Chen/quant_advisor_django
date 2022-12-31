@@ -22,11 +22,8 @@ monthDict = \
 
 
 def date_trans(datestr):
-    # format - June 29, 2019
     def get_key(dict, value):
         return [k for k, v in dict.items() if v == value]
-    # print(datestr)
-    # print('@@@@@@@@@@@@@@@')
     month,date,year = datestr.split()
     date = date.strip(',')
     month = get_key(monthDict,month)[0]
@@ -51,8 +48,6 @@ def date2str(date, format='%Y-%m-%d'):
     return pd.to_datetime(date).strftime(format)
 
 def str2date(date,format='%Y-%m-%d'):
-    # print(datetime.strptime(date,format))
-    # print(date)
     if type(date) == str:
         return datetime.strptime(date,format)
     else:
@@ -63,7 +58,6 @@ def generate_month_end(df):
     datelist = df.index.levels[0]
     pix = multi_dataframe_to_monthly(df)
     datelist_2return = []
-    # dx = multiindex_2dateindex(df.copy())
     for year,month in pix:
         _, monthCountDay = calendar.monthrange(year, month)
         min_date = date(year=year, month=month, day=1)
@@ -73,7 +67,6 @@ def generate_month_end(df):
         if len(to_x)!= 0:
             p = to_x.iloc[-1].name[0]
             datelist_2return.append(p)
-        # trad_days = trad_days.append(df.loc[(p,slice(None)),:])
     return datelist_2return
 
 def generate_trading_days(df):
@@ -89,7 +82,6 @@ def generate_trading_days(df):
         if len(to_x)!= 0:
             p = to_x.iloc[-1].name[0]
             trad_days = trad_days.append(df.loc[(p,slice(None)),:])
-    # print(trad_days.dropna())
     return trad_days
 
 
@@ -117,8 +109,6 @@ def multi_dataframe_to_monthly(datestocks):
     pix = list(map(year_month,pix))
     return pix
 
-# print(pd.date_range('2015-01-01','2017-03-04','D'))
-# print(datelist(date_ranging('2015-01-01','2017-03-04','M')))
 
 def date_pointer(df,year,month,day=None):
     _, monthCountDay = calendar.monthrange(year, month)
@@ -128,17 +118,4 @@ def date_pointer(df,year,month,day=None):
     return df.query(pointer)
 
 if __name__=='__main__':
-    # pd_index = date_ranging('2015-01-01','2017-03-04','5D')
-    # print(pd_indexd)
-    # for i in pd_index:
-    #     print(i.year,i.month)
-    # dt = date(2010, 1, 1)
-    # print(date2datetime(dt))
     print(date_trans('June 26, 2019'))
-
-
-
-    # print(date2str(shift_time_('2015-01-01',30)))
-        # print(i.month)
-    # a = date.today()
-    # print(a.month)

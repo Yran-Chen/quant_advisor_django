@@ -6,13 +6,12 @@ import pandas as pd
 class CachePool():
 
     def __init__(self):
-        # self.keys = []
         self.save_pool = {}
         self.user_pool = {}
         self.run_kernel = {}
 
     def save_strategy_for_user(self,strat,uid=None,user_proxy = None):
-        """用户保存策略"""
+        """save strategy for user"""
 
         # if uid not in self.user_pool.keys():
         if uid not in self.user_pool.keys():
@@ -27,25 +26,18 @@ class CachePool():
         # self.user_pool[strat['uid']].add2stra_pool(strat)
 
     def load_strategy_for_user(self,uid,user_proxy = None):
-        """用户加载策略"""
+        """load strategy for user."""
 
         if uid in self.user_pool.keys():
-            # print('1')
             return self.user_pool[uid]
         else:
-            # print('2')
             futStratPoolTmp = FutStrategyPool(uid)
             user_df = user_proxy.get_user_df(uid=uid)
-            # print('3')
-            # print(user_df)
             futStratPoolTmp.load_from_df(user_df)
             self.user_pool[uid] = futStratPoolTmp
-            # print(self.user_pool[uid])
-
             return self.user_pool[uid]
 
     def get_pid_for_user(self, uid, name=None, user_proxy=None):
-
         return user_proxy.get_pid_df(uid=uid,name=name)
 
     def run_forward(self,dataview):
@@ -72,16 +64,11 @@ class CachePool():
                 already_saved_key.append(key)
             else:
                 self.save_pool[key] = None
-        # print(keyset)
-        # print(already_saved_key)
-        # print(self.save_pool.keys())
         if already_saved_key is not None:
-            # print('ASK :',already_saved_key)
             for ki in already_saved_key:
                 alpha_id, op_id = ki.split('$')
                 index_ = key_df.loc[key_df['alpha_id'] == alpha_id].index
                 index_ = key_df.loc[index_].loc[key_df['op_id'] == op_id].index
-                # print(index_)
                 key_df.drop(index=index_, axis=0, inplace=True)
         # print(key_df)
         return key_df
@@ -98,7 +85,6 @@ class CachePool():
                 already_saved_key.append(key)
             else:
                 self.save_pool[key] = None
-            # self.save_pool[key] = stras_df[key]
         return already_saved_key
 
     @staticmethod
@@ -107,20 +93,19 @@ class CachePool():
         for key in keys:
             alpha_id, op_id = key.split('$')
             df.insert(value=[alpha_id, op_id])
-        print(df)
+        # print(df)
         return df
 
     @staticmethod
     def df2keys(df):
         keyset = []
-        # print(df)
+
         for i in df.index:
-            # print(i)alpha_id=alpha_id.replace('-','_'), op_id=op_id.replace('-','_')
             keyset.append('{0}${1}'.format(df.loc[i]['alpha_id'], df.loc[i]['op_id']))
         return keyset
 
 class FutStrategyPool():
-    """策略缓存池"""
+    """Cache For Strategy Pool"""
 
     def __init__(self,uid):
         self.uid = uid
@@ -130,7 +115,7 @@ class FutStrategyPool():
         if strat.uid == self.uid:
             self.stra_pool[strat.name] = strat
         else:
-            print('Wrong User. Cant Copy.')
+            print('Wrong User. Cannot Copy.')
 
     def get_strat_name(self):
         return self.stra_pool.keys()

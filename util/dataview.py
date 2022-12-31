@@ -1,8 +1,5 @@
 import pandas as pd
 import datetime
-# from backtest_params_pool import *
-# from database.DB_Factors import  FactorDatabase
-# from database.DB_Future import FutureDatabase
 import util.Parser_dataview as Parser_dataview
 import numpy as np
 import math
@@ -47,7 +44,6 @@ class DataView():
             return code[:1]
 
     def get_match_stras(self):
-        # get the matching strategy, alpha_id, op_id
         ids = self.filter()
         t0 = time.time()
 
@@ -62,7 +58,6 @@ class DataView():
         print("Total time usage ", time.time() - t0)
 
     def get_match_stras_withindex(self,ids):
-        # get the matching strategy, alpha_id, op_id
         stras_df = pd.DataFrame()
         t0 = time.time()
         total_len = len(ids.index)
@@ -71,7 +66,6 @@ class DataView():
         for i in ids.index:
             item = ids.loc[i]
             alpha_id, op_id = ids.loc[i, "alpha_id"], ids.loc[i, "op_id"]
-            # print(alpha_id,op_id)
             trade_df = self.get_trade_df(alpha_id=alpha_id.replace('-','_'), op_id=op_id.replace('-','_'))
             trade_df = trade_df.sort_values(by = ["date"])
             daily_pnl = self.cal_daily_pnl(trade_df=trade_df)
@@ -102,8 +96,6 @@ class DataView():
         alpha_df = alpha_df.reset_index()
         op_code_df = op_code_df.reset_index()
 
-        # print(op_code_df.head(5),alpha_df.head(5))
-        # print(op_code_df.sort_values( by = ["date"])[:300])
         trade_df = pd.merge(op_code_df, alpha_df, on = ["date", "instrument"], how = "inner")
         trade_df = trade_df.dropna(how = "any", axis = 0)
         trade_df = trade_df.sort_values(by = ["date"])
@@ -204,32 +196,19 @@ class DataView():
         def cal_ratio(sub_df):
             sub_df = sub_df.sort_values(by = ["date"], ascending = True)
             sub_df["close_ratio"] = sub_df["close"].pct_change(periods=1)
-            # print(sub_df)
-            # sub_df["close_pre"] = sub_df["close"].shift(1)
-            # sub_df["close_ratio"] = sub_df.apply(lambda r: r["close"]/r["close_pre"] - 1, axis =1)
-            # # print(sub_df[-5:])
             return sub_df
         df = df.groupby(["code"], as_index = False).apply(cal_ratio)
         df = df.reset_index(drop  = True)
 
         t2 = time.time()
-        # print("duration 1 ", t2 - t1)
-        # print("-" * 77)
-        # print(df[:100])
 
         trade_record = pd.merge(trade_record, df, on=["date", "code"], how="inner")
-        # trade_record["return"] = trade_record.apply(lambda r: (r["close"] - r["open"]) / r["open"], axis=1)
-        # print(trade_record[:100])
-        # print("-" * 7)
         trade_record["close_ratio"] = trade_record.apply(lambda r: r["close_ratio"] * r["holding"], axis=1)
-
         # del df, date_df, date_index_df
         daily_pnl = trade_record[[ "date", "close_ratio"]].groupby(["date"], as_index=False).sum()
         daily_pnl.rename(columns = {"close_ratio": "daily_v_change"}, inplace = True)
         daily_pnl = pd.merge(daily_pnl, date_index_df, on = ["date"])
 
-        # print("-" *7)
-        # print(daily_pnl[:100])
         daily_pnl["daily_v_ratio"] = daily_pnl["daily_v_change"] + 1
 
         def cal_pnl(sub_df):
@@ -238,28 +217,19 @@ class DataView():
             sub_df["cum_v_prev"] = sub_df["cum_v"].shift(1)
             sub_df = sub_df.fillna(1)
             sub_df["pnl"] = sub_df.apply(lambda r: r["cum_v"] - r["cum_v_prev"] , axis = 1)
-            # print(sub_df)
             return  sub_df
 
         daily_pnl = daily_pnl.groupby(["op_date"]).apply(cal_pnl)
-        # print("duration 2", time.time() - t2)
-        # print(daily_pnl)
-        # breakpoint()
         daily_pnl = daily_pnl[["date", "daily_v_change", "pnl"]]
         daily_pnl = daily_pnl.reset_index(drop = True)
-
-        # print(daily_pnl)
         daily_pnl = daily_pnl.set_index(["date"])
-        # print("Time usage ", time.time() - t0)
-        # print(daily_pnl[:300])
-        # print("-" * 3)
+
         return daily_pnl
 
 
     def get_op_code_df(self, op_cond):
         # todo get the column from DB factors
         code_df = self.proxy.get_op_code_df()
-        # code_df = code_df.set_index(["date"])
 
         # get main code or nearest 1, 2, 3, 4 code
         # todo: add  code df check volume function
@@ -324,31 +294,3 @@ class DataView():
         for key in df.columns:
             dict[key] = df[key]
         return dict
-
-
-
-# if __name__ == "__main__":
-#     db_name = 'ultralpha_db'
-#     host_name = '40.73.102.25'
-#     user = 'cyr'
-#     password = 'cyr'
-#     port = '5432'
-#     fut_name = 'al'
-#     start_date = '2010-04-01'
-#     end_date = '2014-04-01'
-#     print ('YOUVEFKED UP.')
-#
-#     data_proxy = FactorDatabase(db_name=db_name, host_name=host_name, user_name=user, pwd=password,
-#                                 port=port)
-#     future_proxy = FutureDatabase(db_name = db_name,host_name = host_name, user_name = user, pwd = password,
-#                               port = port )
-#
-#     dv = DataView(data_proxy=data_proxy, future_proxy = future_proxy)
-#
-#     keys = dv.filter()
-#     dv.get_match_stras()
-
-    # op_df = pd.read_csv('alpha_data\\op_param_df.csv')
-    # print(op_df[:10])
-    # param_pool = dv.param_generator(op_df)
-    # print(param_pool)

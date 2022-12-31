@@ -5,9 +5,6 @@ import os
 import numpy as np
 import time
 import pandas as pd
-# from fastback.preprocess import
-# from database.DB_Factors import data_proxy
-
 import util.Parser_dataview as Parser_dataview
 from util.dataview import DataView
 from cache.cache_pool import CachePool
@@ -19,15 +16,11 @@ from portfo_optimize.portfo_optimization import portfo_optimize
 from datetime import datetime
 
 
-# UserSPool = FutStrategyPool('master')
-
 def run_return_user_portfolio(request, cachepool_ = None, user_proxy = None):
     """返回用户策略"""
 
     print('返回用户策略。。。')
-    # uid = request.get('uid')
     uid = upar.url_user_session_parse(request)
-    # uid = 'wangdi'
     print('33')
     cachepool_.load_strategy_for_user(uid,user_proxy)
 
@@ -42,7 +35,6 @@ def run_copy_strat(request,cachepool_ = None, user_proxy = None):
 
     stra_dic = upar.url_strat_parse(request)
     print(stra_dic)
-    # uid = upar.url_user_session_parse(request)
 
     uid = 'wangdi'
     stra_dic['uid'] = uid
@@ -55,7 +47,6 @@ def run_copy_strat(request,cachepool_ = None, user_proxy = None):
 
         cachepool_.load_strategy_for_user(uid = strat_temp.uid, user_proxy= user_proxy)
         cachepool_.save_strategy_for_user(strat =strat_temp ,uid = strat_temp.uid, user_proxy=user_proxy)
-        # cachepool_.load_strategy_for_user(uid = strat_temp.uid, user_proxy= user_proxy)
 
         return stra_dic
 
@@ -77,18 +68,14 @@ def return_condition(request):
 def run_condition_filter(request,dataview_ = None,cachepool_ = None):
     condition =  return_condition(request)
     filtered_perf_df = dataview_.run_filter_performance(condition)
-    # print(filtered_perf_df)
     keys = filtered_perf_df[['alpha_id','op_id']]
     keys_new = keys
     if CACHE_:
         keys_new = cachepool_.find_filter_key(keys.copy())
-        # print('New key:\n',keys_new)
-        # print("Existed key:\n",keys)
     return keys_new,keys,filtered_perf_df
 
 def run_portfolio_opt(request,ret_p,method = "Sharpe",freq = 'M'):
     selected,start_date,end_date = upar.url_selected_parse(request)
-    # print(selected)
     if selected is None:
         return ret_p
     else:
@@ -220,18 +207,14 @@ def index(request):
     upar.url_user_session_parse(request)
     keys_new,keys,filtered_perf_df = run_condition_filter(request,dataViewDefault,cachePoolDefault)   # keys 是alpha_id和op_id的二维数组，filtered_perf_df返回的是策略的二维数组
     perf_dict = performance_trans_format(filtered_perf_df)
-    # time.sleep(5)
     ret_p = dataViewDefault.get_match_stras_withindex(keys_new)
-    # ret_p.to_csv('aaa.csv')    # 先存数据，用来测试
 
     if CACHE_:
             cachePoolDefault.save_key_values(ret_p)
             ret_p = cachePoolDefault.load_key_values(keys)
 
     ret_dic = ret_trans_format(ret_p.cumsum())
-    # print(perf_dict)
     print('parse end.')
-    # print(perf_dict)
     callback = "success_jsonp"
     load_dic = callback + "(" + json.dumps(perf_dict) + ")"
     print(load_dic)
@@ -246,56 +229,36 @@ def portfo_opt(request):
     if CACHE_:
             cachePoolDefault.save_key_values(ret_p)
             ret_p = cachePoolDefault.load_key_values(keys)
-    ret_p = run_portfolio_opt(request,ret_p)
 
+    ret_p = run_portfolio_opt(request,ret_p)
     uid = request.session.get('username')
-    # uid = 'wangdi'
     user = User.objects.filter(username=uid, is_staff=False)
+
     if user:
         ret_p = ret_p['20100105': '20171229']
 
     ret_dic = ret_trans_format(ret_p.cumsum())
     # print('optimization end.')
-
     callback = "success_jsonp"
     load_dic = callback + "(" + json.dumps(ret_dic) + ")"
 
     return HttpResponse(load_dic)
 
-# def user_portfolio(request):
-#     """请求组合列表"""
-#
-#     print('请求组合列表。。。。')
-#     ret_portfo_list_dic =  portfolio_list_trans_format( run_return_user_portfolio(request, cachePoolDefault, user_proxy) )
-#
-#     # ret_portfo_list_dic =  portfolio_list_trans_format( run_return_user_portfolio(request,cachePoolDefault, user_proxy) )
-#     print(ret_portfo_list_dic)
-#     response = JsonResponse(ret_portfo_list_dic)
-#
-#     # response["Access-Control-Allow-Credentials"] = "true"
-#     return response
 
 def copy_strat(request):
     """创建策略组合"""
 
     dict = run_copy_strat(request, cachePoolDefault, user_proxy)
-    # print('44')
-    # print(dict)
-
     pid = user_proxy.get_list_value(dict['uid'],dict['name'])['pid']
-    # print(pid)
     callback = "success_jsonp"
     load_dic = callback + "(" + json.dumps(pid) + ")"
-    # print(load_dic)
-    # pid = json.dumps(pid)
-    # print(pid)
+
     return HttpResponse(load_dic)
-    # return JsonResponse(pid, safe=False)
+
 
 def user_portfolio_list(request):
     """请求用户策略组合列表"""
 
-    # uid = request.GET.get('uid')
     uid = 'wangdi'
     list = user_proxy.get_list(uid)
     index = []
@@ -303,7 +266,7 @@ def user_portfolio_list(request):
     for i in list:
         index.append(i[0])
         value.append(i[1])
-    # print(index, value)
+
     dict1 = dict(zip(index, value))
     print(dict1)
     response = {
@@ -321,25 +284,17 @@ def portfo_index(request):
     json_dict = json.loads(request.body)
     uid = json_dict.get('uid')
 
-    # uid = request.POST.get('uid')
     index = json_dict.get('index')
     label = json_dict.get('label')
-    # print(uid, index)
 
 
     result_dict = user_proxy.get_list_value(uid, label)
-    # print('1')
-    # print(result_dict)
 
-    # start_date = result_dict['start_date'].strftime("%Y-%m-%d %H:%M:%S")
-    # end_date = result_dict['end_date'].strftime("%Y-%m-%d %H:%M:%S")
     if not result_dict['start_date']:
-        # print('2')
         start_date = 'null'
-        # print(start_date)
+
     else:
         start_date = result_dict['start_date'].strftime("%Y-%m-%d")
-        # print(start_date)
 
     if not result_dict['end_date']:
         end_date = 'null'
@@ -385,7 +340,6 @@ def portfo_delete(request):
     print('删除组合列表')
 
     json_data = json.loads(request.body)
-    # uid = json_data.get('uid')
     uid = 'wangdi'
     index = json_data.get('index')
     label = json_data.get('label')
@@ -406,14 +360,10 @@ def portfo_save(request):
     print(json_paras)
     json_allocation = json_dict.get('data').get('allocationTable')
     print(json_allocation)
-    # print(json_dict)
 
     name = json_dict.get('label')
-    # uid = request.COOKIES.get('username')
     uid = json_dict.get('uid')
-    # uid = 'wangdi'
     end_date = json_paras.get('end_date')
-    # print(end_date)
     opt_method = json_paras.get('opt_method')
     pid = json_dict.get('index')
     selected = json_paras.get('selected')

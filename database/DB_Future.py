@@ -23,36 +23,6 @@ class FutureDatabase(Database):
         self.end_date = end_date
         self.future_df = None
         self.fut_df_init(start_date,end_date,set_time_range)
-        # elapsed = (time.clock() - start)
-        # print("Time used:", elapsed)
-        #for now！！！！！
-        # self.future_main_df["instrument"] = self.future_main_df["instrument"].map(lambda s: s.lower())
-        #         self.future_main_df["code"] = self.future_main_df["code"].map(lambda s: s.lower())
-        #         self.future_df.to_csv("future_df.csv")
-        #         self.future_main_df.to_csv("future_main_df.csv")
-        #         # print("new future df ")
-        #         # print(self.future_df[:100])
-        #         # print(self.future_df.shape[0])
-        #
-        #         self.future_basic_df = self.get_future_data(table_name='fut_basic', if_includes_date= False)
-        #         self.future_basic_df.to_csv("future_basic.csv")
-        #         self.rmb_exchange_df = self.load_preprocess_rmb_exchange()
-        #         self.cpi_df = self.load_preprocess_cpi()
-        #         elapsed = (time.clock() - start)
-        #
-        #         # self.future_df.to_csv("future_df.csv")
-        #         # print("total rows: ", self.future_df.shape[0])
-        #         # tmp_df = self.future_df[self.future_df["volume"] == 0]
-        # print(tmp_df.shape[0])
-        # print("*" * 7)
-        # tmp_df = self.future_df[self.future_df["amount"] < 1000]
-        # # print(tmp_df[:1000])
-        # print(tmp_df.shape[0])
-        # print("*" * 7)
-        # tmp_df = self.future_df[self.future_df["amount"] < 10000]
-        # print(tmp_df.shape[0])
-        # print("*" * 7)
-        # breakpoint()
 
     def fut_df_init(self,start_date,end_date,set_time_range):
         # 加载每日表格
@@ -299,11 +269,6 @@ class FutureDatabase(Database):
                 main_code =  df.loc[df["volume"] == max(df["volume"]), "code"].values[0]
                 df.loc[df["volume"] < med_vol * 0.5, ["code", "volume"]] = [main_code, max_vol]
                 df.loc[df["volume"] < 1000, ["code", "volume"]] = [main_code, max_vol]
-                # print(df)
-                # print("!" * 7)
-                # if df[df["volume"] < 10000].shape[0] > 0:
-                #     print("special situation")
-                #     print(df)
             return df
 
         df = df.groupby(["date", "instrument"]).apply(set_n_nearest_val)
@@ -364,40 +329,27 @@ class FutureDatabase(Database):
         else:
             return code[:1]
 
-# db_name = 'ultralpha_db'
-# host_name = '40.73.102.25'
-# user = 'cyr'
-# password = 'cyr'
-# port = '5432'
-# fut_name = 'al'
-# start_date = '2010-04-01'
-# end_date = '2014-04-01'
-#
-# future_proxy =  FutureDatabase(db_name = db_name,host_name = host_name, user_name = user, pwd = password,
-#                           port = port )
-# print('Future Database initing finished.')
+if __name__ == "__main__":
 
-# if __name__ == "__main__":
-#
-#     db_name = 'ultralpha_db'
-#     host_name = '192.168.0.116'
-#     user = 'cyr'
-#     password = 'cyr'
-#     port = '5432'
-#     fut_name = 'al'
-#     start_date = '2010-04-01'
-#     end_date = '2014-04-01'
-#
-#     database = FutureDatabase(db_name = db_name,host_name = host_name, user_name = user, pwd = password,
-#                               port = port )
-#
-#     # print(database.get_main_per_month_end(freq= 7, freq_unit="D"))
-#     df = database.get_nearest_contract_with_time_freq(n_nearest_index=2, freq=7, freq_unit="D")
+    db_name = 'ultralpha_db'
+    host_name = '192.168.0.116'
+    user = 'cyr'
+    password = 'cyr'
+    port = '5432'
+    fut_name = 'al'
+    start_date = '2010-04-01'
+    end_date = '2014-04-01'
 
-    # print(df.sample(200))
-    # print(df[df["volume"] < 200].shape[0])
+    database = FutureDatabase(db_name = db_name,host_name = host_name, user_name = user, pwd = password,
+                              port = port )
 
-    # import matplotlib.pyplot as plt
-    # alist = df["volume"]
-    # plt.hist()
-    # plt.show()
+    # print(database.get_main_per_month_end(freq= 7, freq_unit="D"))
+    df = database.get_nearest_contract_with_time_freq(n_nearest_index=2, freq=7, freq_unit="D")
+
+    print(df.sample(200))
+    print(df[df["volume"] < 200].shape[0])
+
+    import matplotlib.pyplot as plt
+    alist = df["volume"]
+    plt.hist()
+    plt.show()
